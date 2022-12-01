@@ -16,15 +16,13 @@ from src.app.utils import generate_jwt
 
 
 CLIENT_SECRETS_FILENAME = os.environ['GOOGLE_CLIENT_SECRETS']
-
+BACKEND_URL_STR = os.getenv('BACKEND_URL')
 SCOPES = [
-    "openid",
     'https://www.googleapis.com/auth/contacts.readonly',
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email"
 ]
-SECRET_KEY = os.getenv('SECRET_KEY')
-BACKEND_URL_STR = os.getenv('BACKEND_URL')
+
 users = Blueprint("users", __name__,  url_prefix="/users")
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -32,7 +30,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 flow = Flow.from_client_config(
     client_config=json.loads(CLIENT_SECRETS_FILENAME), 
     scopes=SCOPES, 
-    redirect_uri=f"${BACKEND_URL_STR}/users/callback"
+    redirect_uri=f"${BACKEND_URL_STR}/users/callbacks"
 )
 
 
@@ -48,12 +46,16 @@ def auth_google():
     )
 
 
-@users.route("/callback", methods=["GET"])
+@users.route("/callbacks", methods=["GET"])
 def callback():
     flow.fetch_token(authorization_response=request.url)
     credentials = flow.credentials
     with open('token.json', 'w') as token:
-        token.write(credentials.to_json())
+        credJson = credentials.to_json()
+        credObj = json.loads(credJson)
+        credObj['refresh_token'] = None
+        credJson = json.dumps(credObj)
+        token.write(credJson)
     
     request_session = requests.session()
     token_google = auth.transport.requests.Request(session=request_session)
@@ -71,7 +73,7 @@ def callback():
 
     token = generate_jwt(user_google_dict)
 
-    return redirect(f"{current_app.config['FRONTEND_URL']}/#/people/{token}")
+    return redirect(f"{current_app.config['FRONTEND_URL']}/#/people/contacts/{token}")
 
 
 @users.route("/verify/", methods=['GET'])

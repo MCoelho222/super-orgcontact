@@ -19,7 +19,6 @@ def create_personal_info():
             'email': user['email']
         }
         contacts = user_info['contacts']
-        print(contacts)
         user_exists = mongo_client.users.find_one({'email': user['email']})
         if not user_exists:
             mongo_client.users.insert_one(user_data)
