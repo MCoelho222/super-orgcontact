@@ -4,7 +4,7 @@ import os
 import json
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import Flow
+from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from src.app.utils import generate_jwt
@@ -15,6 +15,7 @@ CLIENT_SECRETS_FILENAME = os.getenv('GOOGLE_CLIENT_SECRETS')
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = [
+    "openid",
     'https://www.googleapis.com/auth/contacts.readonly',
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email"
@@ -34,13 +35,13 @@ def main():
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
-    else:
-        flow = Flow.from_client_config(
-            client_config=json.loads(CLIENT_SECRETS_FILENAME), scopes=SCOPES)
-        creds = flow.run_local_server(port=0)
-    # Save the credentials for the next run
-    with open('token.json', 'w') as token:
-        token.write(creds.to_json())
+        else:
+            flow = InstalledAppFlow.from_client_config(
+                client_config=json.loads(CLIENT_SECRETS_FILENAME), scopes=SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
     try:
         service = build('people', 'v1', credentials=creds)
       
