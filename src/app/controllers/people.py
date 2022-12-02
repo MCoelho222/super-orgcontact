@@ -9,7 +9,7 @@ from src.app.middlewares.auth import has_logged
 people = Blueprint("people", __name__, url_prefix="/people")
 
 @people.route("/", methods=['GET'])
-# @has_logged()
+@has_logged()
 def create_personal_info():
     try:
         user_info = main()
