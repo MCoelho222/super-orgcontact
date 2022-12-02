@@ -31,5 +31,7 @@ def user_logout():
         if os.path.exists('token.json'):
             os.remove('token.json')
             return {'success': 'Token removed.'}, 200
+        else:
+            return {'success': 'No token to be removed.'}, 200
     except Exception:
         return {"error": "Token could not be removed."}, 500
