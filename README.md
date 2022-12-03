@@ -10,7 +10,7 @@ Access to frontend: [Super OrgContact frontend](https://superorgcontactfirebase.
 
 **Important** Unfortunatelly, it is not possible to get access right now, because of app verification issues. But it will be fixed soon!
 
-For now, please run it locally. Just **switch to branch dev** and follow this instructions: 
+For running locally, please follow this instructions:
 
 It uses **MongoDB Atlas** database. Please, follow the **.env_sample** file.
 
