@@ -1,12 +1,24 @@
 # Super OrgContact
 
+## Description
+
 This is the backend application of the Super OrgContact project.
 
-Access to frontend: [Super OrgContact frontend](https://mcoelho-people.web.app).
+It is running on Google Cloud Run [Backend URL](https://superorgcontact-3fufpf5spq-rj.a.run.app), and you can get access by the frontend on firebase. 
 
-It uses MongoDB Atlas database. Please, follow the **.env_sample** file.
+Access to frontend: [Super OrgContact frontend](https://superorgcontactfirebase.web.app/).
 
-You will need a **web application credentials (JSON file)** from a project at Goodle Could Platform GCP. Once you get it, just insert in your **.env** file.
+**Important** Unfortunatelly, it is not possible to get access right now, because of app verification issues. But it will be fixed soon!
+
+For running locally, please **switch to branch dev** and follow this instructions:
+
+It uses **MongoDB Atlas** database. Please, follow the **.env_sample** file.
+
+You will need:
+- Create a database at MongoDB Atlas and insert the MONGO_URI and database name in **.env**;
+- an **installed application credentials (JSON file)** from a project at Goodle Could Platform GCP;
+- Enable **People Api**;
+- Once you get it, just insert in your **.env** file, just like the .env_sample.
 
 ## Project setup
 ```
