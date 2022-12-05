@@ -74,7 +74,7 @@ def callback():
 
     token = generate_jwt(user_google_dict)
 
-    return redirect(f"{current_app.config['FRONTEND_URL']}/#/people/contacts/{token}")
+    return redirect(f"{current_app.config['FRONTEND_URL']}/#/people/{token}")
 
 
 @users.route("/verify/", methods=['GET'])
