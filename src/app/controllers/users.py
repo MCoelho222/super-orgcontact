@@ -18,6 +18,7 @@ from src.app.utils import generate_jwt
 CLIENT_SECRETS_FILENAME = os.environ['GOOGLE_CLIENT_SECRETS']
 BACKEND_URL_STR = os.getenv('BACKEND_URL')
 SCOPES = [
+    "openid",
     'https://www.googleapis.com/auth/contacts.readonly',
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email"

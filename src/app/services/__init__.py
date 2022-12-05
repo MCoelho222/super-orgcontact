@@ -15,6 +15,7 @@ CLIENT_SECRETS_FILENAME = os.getenv('GOOGLE_CLIENT_SECRETS')
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = [
+    "openid",
     'https://www.googleapis.com/auth/contacts.readonly',
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email"
