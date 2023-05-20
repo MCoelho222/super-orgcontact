@@ -1,11 +1,8 @@
 import os
-import json
-import requests
 from bson import json_util
 from flask import Blueprint
 from flask.wrappers import Response
-from flask import request, current_app
-from flask.globals import session
+from flask import request
 from src.app.utils import verify_token
 
 

@@ -37,7 +37,8 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_config(
-                client_config=json.loads(CLIENT_SECRETS_FILENAME), scopes=SCOPES)
+                client_config=json.loads(CLIENT_SECRETS_FILENAME),
+                scopes=SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
@@ -51,7 +52,10 @@ def main():
             personFields='emailAddresses').execute()
         connections = contacts_service.get('connections', [])
         
-        user_service = service.people().get(resourceName='people/me', personFields='names,emailAddresses').execute()
+        user_service = service.people().get(
+            resourceName='people/me',
+            personFields='names,emailAddresses').execute()
+
         username = user_service.get('names')[0].get('displayName')
         useremail = user_service.get('emailAddresses')[0].get('value')
         payload = {
@@ -60,6 +64,7 @@ def main():
             'exp': datetime.utcnow() + timedelta(days=1)
         }
         token = generate_jwt(payload)
+        
         user_infos = {
             'profile': {
                 'name': username,
