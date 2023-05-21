@@ -31,7 +31,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 flow = Flow.from_client_config(
     client_config=json.loads(CLIENT_SECRETS_FILENAME), 
     scopes=SCOPES, 
-    redirect_uri="https://superorgcontact-3fufpf5spq-rj.a.run.app/users/callbacks"
+    redirect_uri="http://127.0.0.1:5000/users/callbacks"
 )
 
 
@@ -74,7 +74,7 @@ def callback():
 
     token = generate_jwt(user_google_dict)
 
-    return redirect(f"{current_app.config['FRONTEND_URL']}/people/{token}")
+    return redirect(f"{current_app.config['FRONTEND_URL']}/#/people/{token}")
 
 
 @users.route("/verify/", methods=['GET'])
