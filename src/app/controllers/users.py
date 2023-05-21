@@ -31,7 +31,7 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 flow = Flow.from_client_config(
     client_config=json.loads(CLIENT_SECRETS_FILENAME), 
     scopes=SCOPES, 
-    redirect_uri="https://superorgcontact-3fufpf5spq-rj.a.run.app/users/callbacks"
+    redirect_uri=f"{BACKEND_URL_STR}/users/callbacks"
 )
 
 
