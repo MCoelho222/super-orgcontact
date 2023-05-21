@@ -1,6 +1,6 @@
 # Super OrgContact
 
-This project was a test for my first job as a Fullstack Developer. It uses the Google People API to get the user's contacts. These e-mails are returned to the frontend, which renders inside a list and displays a pie chart. It also send them to MongoDB. Yes, I got it!
+This project was a test for my first job as a Fullstack Developer. It uses the Google People API to get the user's contacts. These e-mails are returned to the frontend, which renders inside a list and displays a pie chart. It also sends them to MongoDB. I got it!
 
 ## Description
 
